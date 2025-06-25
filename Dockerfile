@@ -39,11 +39,11 @@ RUN mkdir -p src/database
 RUN chmod +x /usr/bin/chromedriver
 
 # Expose port
-EXPOSE 5000
+EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:5000/api/bot/status || exit 1
+    CMD curl -f http://localhost:8080/api/bot/status || exit 1
 
 # Run the application using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "src.main:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "src.main:app"]
